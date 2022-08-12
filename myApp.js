@@ -1,9 +1,25 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
+const mySecret = process.env['MONGO_URI']
+
+mongoose.connect(mySecret, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-let Person;
+//Now, create a model called Person from the personSchema.
+let personSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  age: Number,
+  favoriteFoods: [String]
+})
 
+let Person = mongoose.model('Person', personSchema);;
+
+/*Within the createAndSavePerson function, create a document instance using the Person model constructor you built before. Pass to the constructor an object having the fields name, age, and favoriteFoods. Their types must conform to the ones in the personSchema. Then, call the method document.save() on the returned document instance. Pass to it a callback using the Node convention. This is a common pattern; all the following CRUD methods take a callback function like this as the last argument.*/
 const createAndSavePerson = (done) => {
+
   done(null /*, data*/);
 };
 
