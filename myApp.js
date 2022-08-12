@@ -34,20 +34,51 @@ const createAndSavePerson = (done) => {
   
 };
 
+let arrayOfPeople = [
+  {name: 'Miranda', age: 27, favoriteFoods: ['Mac N Cheese']},
+  {name: 'Nick', age: 29, favoriteFoods: ['Cheese', 'Sun Flower Seeds']},
+  {name: 'Julia', age: 28, favoriteFoods: ['In N Out', 'Jack in the Box']}
+]
+
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople, function(err, people){
+    if(err){
+      return console.error(err);
+    }
+    done(null, people);
+  });
 };
 
+/*Modify the findPeopleByName function to find all the people having a given name, using Model.find() -> [Person]
+
+Use the function argument personName as the search key.*/
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name: personName}, function(err, person){
+    if(err){
+      return console.error(err);
+    }
+    done(null, person);
+  });
 };
 
+/*Modify the findOneByFood function to find just one person which has a certain food in the person's favorites, using Model.findOne() -> Person. Use the function argument food as search key.*/
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods: food}, function(err, data){
+    if(err){
+      return console.error(err);
+    }
+    done(null, data);
+  });
 };
 
+/*Modify the findPersonById to find the only person having a given _id, using Model.findById() -> Person. Use the function argument personId as the search key.*/
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, function(err, data){
+    if(err){
+      return console.error(err);
+    }
+    done(null, data);
+  });
 };
 
 const findEditThenSave = (personId, done) => {
